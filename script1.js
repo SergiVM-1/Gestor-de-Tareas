@@ -26,3 +26,13 @@ const cajaSaludo = document.getElementById("bienvenida");
 if (cajaSaludo) {
     cajaSaludo.textContent = `¡Hola, ${nombre}!`;
 }
+
+const botonEliminar = document.getElementById("eliminar");
+
+if (botonEliminar) {
+    botonEliminar.addEventListener("click", function() {
+        localStorage.removeItem("usuario");
+
+        location.reload();
+    });
+}

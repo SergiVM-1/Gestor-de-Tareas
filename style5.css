@@ -1,0 +1,12 @@
+/*Los estilos del modo claro se pondrán por defecto en la página*/
+body {
+    background-color: white;
+    color: black;
+    transition: background-color 0.3s, color 0.3s; /* Para que el cambio sea suave */
+}
+
+/*Los estilos del dark mode que se añadiran al pulsar el boton*/
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
