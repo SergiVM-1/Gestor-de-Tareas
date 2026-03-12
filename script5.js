@@ -21,10 +21,12 @@ btnToggle.addEventListener("click", () => {
 const tamanioPantalla = document.getElementById("tamaniopantalla");
 
 window.addEventListener("resize", function() {
-    console.log("Has cambiado el tamaño de la ventana");
-    
-    let alto = 
-
+    let alto = window.innerHeight;
     let ancho = window.innerWidth;
-    console.log("El ancho actual es: " + ancho + "px");
+
+    if (tamanioPantalla) {
+        tamanioPantalla.textContent = `Tamaño: ${ancho}px x ${alto}px`;
+    }
+    
+    console.log("Ancho: " + ancho + "px, Alto: " + alto + "px");
 });
