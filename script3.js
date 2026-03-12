@@ -1,41 +1,55 @@
 const boton = document.getElementById("aniadir");
 const lista = document.getElementById("listaTareas");
-const entradaTexto = document.getElementById("texto"); // Cambié el nombre para mayor claridad
+const entradaTexto = document.getElementById("texto");
 
-boton.addEventListener("click", function() {
-    // 1. CAPTURAR EL VALOR: Leemos lo que hay escrito en el textarea en este momento
+// --- 1. FUNCIÓN MAESTRA (La que hace el trabajo) ---
+function procesarTarea() {
     const contenido = entradaTexto.value;
 
-    // Validación opcional: para que no añada tareas vacías
+    // Validación: que no esté vacío
     if (contenido.trim() === "") {
         alert("Por favor, escribe algo en el textarea");
-        return; // Sale de la función y no crea el li
+        return; 
     }
 
+    // Creación de elementos
     const nuevoLi = document.createElement("li");
     const parrafo = document.createElement("p");
-    
-    // 2. ASIGNAR EL VALOR: Usamos el contenido que capturamos arriba
     parrafo.textContent = contenido; 
 
     const nuevoBoton = document.createElement("button");
     nuevoBoton.textContent = "Eliminar";
 
+    // Construcción del nodo
     nuevoLi.appendChild(parrafo);
     nuevoLi.appendChild(nuevoBoton);
     lista.appendChild(nuevoLi);
 
-    // 3. LIMPIAR EL TEXTAREA (Opcional pero recomendado)
+    // Limpieza del campo
     entradaTexto.value = ""; 
 
-    // Eventos de log y borrado (esto ya lo tenías perfecto)
+    // Evento para el log (clic en la tarea)
     nuevoLi.addEventListener("click", function() {
         console.log("Tarea: " + parrafo.textContent);
     });
 
+    // Evento para eliminar (clic en el botón de borrar)
     nuevoBoton.addEventListener("click", function(e) {
         e.stopPropagation();
         nuevoLi.remove();
         console.log("Nodo eliminado");
     });
+}
+
+// --- 2. LOS "ESCUCHADORES" DE EVENTOS ---
+
+// Escuchar el clic en el botón
+boton.addEventListener("click", procesarTarea);
+
+// Escuchar la tecla Enter en el input/textarea
+entradaTexto.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+        e.preventDefault(); // Evita el salto de línea o recarga
+        procesarTarea();    // Ejecuta la función maestra
+    }
 });
